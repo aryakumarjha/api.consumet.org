@@ -11,7 +11,7 @@
     },
     "packageRules": [{
         "matchDatasources": [
-            "npm", "yarn", "bun"
+            "npm", "yarn"
         ],
         "matchDepTypes": ["dependencies"],
         "matchPackagePatterns": ["*"],
