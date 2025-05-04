@@ -1,1 +1,1 @@
-web: yarn install && yarn build && node dist/main.js
+web: bun run build && bun run dist/main.js
