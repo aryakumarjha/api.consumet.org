@@ -59,13 +59,13 @@ Run the following command to clone the repository, and install the dependencies.
 ```sh
 $ git clone https://github.com/consumet/api.consumet.org.git
 $ cd api.consumet.org
-$ npm install #or yarn install
+$ npm install
 ```
 
 start the server!
 
 ```sh
-$ npm start #or yarn start
+$ npm start
 ```
 
 ### Docker
