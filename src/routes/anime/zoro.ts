@@ -45,6 +45,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       if (redis) {
         const cached = await redis.get(cacheKey);
         if (cached) {
+          reply.header('X-Cache-Hit', 'true'); // Add cache hit header
           return reply.status(200).send(JSON.parse(cached));
         }
       }
@@ -72,6 +73,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
         if (redis) {
           const cached = await redis.get(cacheKey);
           if (cached) {
+            reply.header('X-Cache-Hit', 'true'); // Add cache hit header
             return reply.status(200).send(JSON.parse(cached));
           }
         }
@@ -95,6 +97,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       if (redis) {
         const cached = await redis.get(cacheKey);
         if (cached) {
+          reply.header('X-Cache-Hit', 'true'); // Add cache hit header
           return reply.status(200).send(JSON.parse(cached));
         }
       }
@@ -117,6 +120,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       if (redis) {
         const cached = await redis.get(cacheKey);
         if (cached) {
+          reply.header('X-Cache-Hit', 'true'); // Add cache hit header
           return reply.status(200).send(JSON.parse(cached));
         }
       }
@@ -139,6 +143,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       if (redis) {
         const cached = await redis.get(cacheKey);
         if (cached) {
+          reply.header('X-Cache-Hit', 'true'); // Add cache hit header
           return reply.status(200).send(JSON.parse(cached));
         }
       }
@@ -163,6 +168,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
         if (redis) {
           const cached = await redis.get(cacheKey);
           if (cached) {
+            reply.header('X-Cache-Hit', 'true'); // Add cache hit header
             return reply.status(200).send(JSON.parse(cached));
           }
         }
@@ -186,6 +192,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       if (redis) {
         const cached = await redis.get(cacheKey);
         if (cached) {
+          reply.header('X-Cache-Hit', 'true'); // Add cache hit header
           return reply.status(200).send(JSON.parse(cached));
         }
       }
@@ -208,6 +215,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       if (redis) {
         const cached = await redis.get(cacheKey);
         if (cached) {
+          reply.header('X-Cache-Hit', 'true'); // Add cache hit header
           return reply.status(200).send(JSON.parse(cached));
         }
       }
@@ -230,6 +238,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       if (redis) {
         const cached = await redis.get(cacheKey);
         if (cached) {
+          reply.header('X-Cache-Hit', 'true'); // Add cache hit header
           return reply.status(200).send(JSON.parse(cached));
         }
       }
@@ -255,6 +264,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
         if (redis) {
           const cached = await redis.get(cacheKey);
           if (cached) {
+            reply.header('X-Cache-Hit', 'true'); // Add cache hit header
             return reply.status(200).send(JSON.parse(cached));
           }
         }
@@ -277,6 +287,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       if (redis) {
         const cached = await redis.get(cacheKey);
         if (cached) {
+          reply.header('X-Cache-Hit', 'true'); // Add cache hit header
           return reply.status(200).send(JSON.parse(cached));
         }
       }
@@ -301,6 +312,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
         if (redis) {
           const cached = await redis.get(cacheKey);
           if (cached) {
+            reply.header('X-Cache-Hit', 'true'); // Add cache hit header
             return reply.status(200).send(JSON.parse(cached));
           }
         }
@@ -327,6 +339,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       if (redis) {
         const cached = await redis.get(cacheKey);
         if (cached) {
+          reply.header('X-Cache-Hit', 'true'); // Add cache hit header
           return reply.status(200).send(JSON.parse(cached));
         }
       }
@@ -347,12 +360,9 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
         return reply.status(404).send({ message: `Anime with id ${id} not found.` });
       }
       fastify.log.error(err);
-      reply
-        .status(500)
-        .send({
-          message:
-            'Something went wrong fetching anime info. Contact developer for help.',
-        });
+      reply.status(500).send({
+        message: 'Something went wrong fetching anime info. Contact developer for help.',
+      });
     }
   });
 
@@ -380,6 +390,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       if (redis) {
         const cached = await redis.get(cacheKey);
         if (cached) {
+          reply.header('X-Cache-Hit', 'true'); // Add cache hit header
           return reply.status(200).send(JSON.parse(cached));
         }
       }
@@ -397,19 +408,15 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
         err?.message?.includes('404') ||
         err?.message?.toLowerCase().includes('not found')
       ) {
-        return reply
-          .status(404)
-          .send({
-            message: `Episode with id ${episodeId} not found or sources unavailable.`,
-          });
+        return reply.status(404).send({
+          message: `Episode with id ${episodeId} not found or sources unavailable.`,
+        });
       }
       fastify.log.error(err);
-      reply
-        .status(500)
-        .send({
-          message:
-            'Something went wrong fetching episode sources. Contact developer for help.',
-        });
+      reply.status(500).send({
+        message:
+          'Something went wrong fetching episode sources. Contact developer for help.',
+      });
     }
   };
   fastify.get('/watch', watch);
@@ -421,6 +428,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       if (redis) {
         const cached = await redis.get(cacheKey);
         if (cached) {
+          reply.header('X-Cache-Hit', 'true'); // Add cache hit header
           return reply.status(200).send(JSON.parse(cached));
         }
       }
@@ -449,6 +457,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       if (redis) {
         const cached = await redis.get(cacheKey);
         if (cached) {
+          reply.header('X-Cache-Hit', 'true'); // Add cache hit header
           return reply.status(200).send(JSON.parse(cached));
         }
       }
@@ -472,6 +481,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       if (redis) {
         const cached = await redis.get(cacheKey);
         if (cached) {
+          reply.header('X-Cache-Hit', 'true'); // Add cache hit header
           return reply.status(200).send(JSON.parse(cached));
         }
       }
@@ -482,11 +492,9 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       reply.status(200).send(res);
     } catch (err) {
       fastify.log.error(err);
-      reply
-        .status(500)
-        .send({
-          message: 'Something went wrong fetching movies. Contact developer for help.',
-        });
+      reply.status(500).send({
+        message: 'Something went wrong fetching movies. Contact developer for help.',
+      });
     }
   });
 
@@ -497,6 +505,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       if (redis) {
         const cached = await redis.get(cacheKey);
         if (cached) {
+          reply.header('X-Cache-Hit', 'true'); // Add cache hit header
           return reply.status(200).send(JSON.parse(cached));
         }
       }
@@ -507,11 +516,9 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       reply.status(200).send(res);
     } catch (err) {
       fastify.log.error(err);
-      reply
-        .status(500)
-        .send({
-          message: 'Something went wrong fetching ONAs. Contact developer for help.',
-        });
+      reply.status(500).send({
+        message: 'Something went wrong fetching ONAs. Contact developer for help.',
+      });
     }
   });
 
@@ -522,6 +529,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       if (redis) {
         const cached = await redis.get(cacheKey);
         if (cached) {
+          reply.header('X-Cache-Hit', 'true'); // Add cache hit header
           return reply.status(200).send(JSON.parse(cached));
         }
       }
@@ -532,11 +540,9 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       reply.status(200).send(res);
     } catch (err) {
       fastify.log.error(err);
-      reply
-        .status(500)
-        .send({
-          message: 'Something went wrong fetching OVAs. Contact developer for help.',
-        });
+      reply.status(500).send({
+        message: 'Something went wrong fetching OVAs. Contact developer for help.',
+      });
     }
   });
 
@@ -547,6 +553,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       if (redis) {
         const cached = await redis.get(cacheKey);
         if (cached) {
+          reply.header('X-Cache-Hit', 'true'); // Add cache hit header
           return reply.status(200).send(JSON.parse(cached));
         }
       }
@@ -557,11 +564,9 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       reply.status(200).send(res);
     } catch (err) {
       fastify.log.error(err);
-      reply
-        .status(500)
-        .send({
-          message: 'Something went wrong fetching specials. Contact developer for help.',
-        });
+      reply.status(500).send({
+        message: 'Something went wrong fetching specials. Contact developer for help.',
+      });
     }
   });
 
@@ -572,6 +577,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       if (redis) {
         const cached = await redis.get(cacheKey);
         if (cached) {
+          reply.header('X-Cache-Hit', 'true'); // Add cache hit header
           return reply.status(200).send(JSON.parse(cached));
         }
       }
@@ -582,11 +588,9 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       reply.status(200).send(res);
     } catch (err) {
       fastify.log.error(err);
-      reply
-        .status(500)
-        .send({
-          message: 'Something went wrong fetching TV shows. Contact developer for help.',
-        });
+      reply.status(500).send({
+        message: 'Something went wrong fetching TV shows. Contact developer for help.',
+      });
     }
   });
 };
