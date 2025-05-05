@@ -463,8 +463,10 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       const res = await zoro.fetchEpisodeSources(episodeId, server, subOrDub);
 
       if (redis) {
-        // Cache watch links for a shorter duration, e.g., 15 minutes
-        await redis.set(cacheKey, JSON.stringify(res), 'EX', 900);
+        if (res.sources.length > 0) {
+          // Cache watch links for a shorter duration, e.g., 15 minutes
+          await redis.set(cacheKey, JSON.stringify(res), 'EX', 900);
+        }
       }
 
       reply.status(200).send(res);
