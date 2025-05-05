@@ -24,7 +24,7 @@
     },
   },
   "packages": {
-    "@consumet/extensions": ["@consumet/extensions@github:aryakumarjha/consumet.ts#3bcf622", { "dependencies": { "ascii-url-encoder": "^1.2.0", "axios": "^1.7.9", "cheerio": "^1.0.0-rc.12", "crypto-js": "^4.1.1", "domhandler": "^5.0.3", "form-data": "^4.0.0", "husky": "^9.1.1" } }, "aryakumarjha-consumet.ts-3bcf622"],
+    "@consumet/extensions": ["@consumet/extensions@github:aryakumarjha/consumet.ts#b10e734", { "dependencies": { "ascii-url-encoder": "^1.2.0", "axios": "^1.7.9", "cheerio": "^1.0.0-rc.12", "crypto-js": "^4.1.1", "domhandler": "^5.0.3", "form-data": "^4.0.0", "husky": "^9.1.1" } }, "aryakumarjha-consumet.ts-b10e734"],
 
     "@fastify/ajv-compiler": ["@fastify/ajv-compiler@3.6.0", "", { "dependencies": { "ajv": "^8.11.0", "ajv-formats": "^2.1.1", "fast-uri": "^2.0.0" } }, "sha512-LwdXQJjmMD+GwLOkP7TVC68qa+pSSogeWWmznRJ/coyTcfe9qA05AHFSe1eZFwK6q+xVRpChnvFUkf1iYaSZsQ=="],
 
