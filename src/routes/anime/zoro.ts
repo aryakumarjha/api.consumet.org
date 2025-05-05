@@ -14,6 +14,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
     rp.status(200).send({
       intro: `Welcome to the zoro provider: check out the provider's website @ ${baseUrl}`,
       routes: [
+        '/home',
         '/:query',
         '/search-suggestions/:query',
         '/studio/:studioId',
@@ -35,6 +36,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
         '/specials',
         '/tv',
         '/spotlight',
+        '/trending',
       ],
       documentation: 'https://docs.consumet.org/#tag/zoro',
     });
@@ -114,6 +116,48 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
     } catch (err) {
       fastify.log.error(err);
       reply.status(500).send({ message: 'Error fetching top airing anime.' });
+    }
+  });
+
+  fastify.get('/trending', async (request: FastifyRequest, reply: FastifyReply) => {
+    const cacheKey = `zoro:trending`;
+    try {
+      if (redis) {
+        const cached = await redis.get(cacheKey);
+        if (cached) {
+          reply.header('X-Cache-Hit', 'true'); // Add cache hit header
+          return reply.status(200).send(JSON.parse(cached));
+        }
+      }
+      const res = await zoro.fetchTrending();
+      if (redis) {
+        await redis.set(cacheKey, JSON.stringify(res), 'EX', 21600); // Cache for 6 hours
+      }
+      reply.status(200).send(res);
+    } catch (err) {
+      fastify.log.error(err);
+      reply.status(500).send({ message: 'Error fetching trending anime.' });
+    }
+  });
+
+  fastify.get('/home', async (request: FastifyRequest, reply: FastifyReply) => {
+    const cacheKey = `zoro:home`;
+    try {
+      if (redis) {
+        const cached = await redis.get(cacheKey);
+        if (cached) {
+          reply.header('X-Cache-Hit', 'true'); // Add cache hit header
+          return reply.status(200).send(JSON.parse(cached));
+        }
+      }
+      const res = await zoro.fetchHome();
+      if (redis) {
+        await redis.set(cacheKey, JSON.stringify(res), 'EX', 21600); // Cache for 6 hours
+      }
+      reply.status(200).send(res);
+    } catch (err) {
+      fastify.log.error(err);
+      reply.status(500).send({ message: 'Error fetching home data.' });
     }
   });
 
