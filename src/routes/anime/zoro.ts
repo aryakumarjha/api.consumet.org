@@ -15,6 +15,10 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       intro: `Welcome to the zoro provider: check out the provider's website @ ${baseUrl}`,
       routes: [
         '/:query',
+        '/search-suggestions/:query',
+        '/studio/:studioId',
+        '/top-upcoming',
+        '/schedule/:date',
         '/recent-episodes',
         '/top-airing',
         '/most-popular',
@@ -30,6 +34,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
         '/ova',
         '/specials',
         '/tv',
+        '/spotlight',
       ],
       documentation: 'https://docs.consumet.org/#tag/zoro',
     });
