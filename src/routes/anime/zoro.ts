@@ -42,6 +42,22 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
     });
   });
 
+  fastify.get('/clear-cache', async (request: FastifyRequest, reply: FastifyReply) => {
+    if (!redis) {
+      return reply.status(500).send({ message: 'Redis is not configured.' });
+    }
+    const keys = await redis.keys('zoro:*');
+    if (keys.length === 0) {
+      return reply.status(200).send({ message: 'No cache keys found.' });
+    }
+    const pipeline = redis.pipeline();
+    keys.forEach((key) => {
+      pipeline.del(key);
+    });
+    await pipeline.exec();
+    return reply.status(200).send({ message: 'Cache cleared successfully.' });
+  });
+
   fastify.get('/:query', async (request: FastifyRequest, reply: FastifyReply) => {
     const query = (request.params as { query: string }).query;
     const page = (request.query as { page: number }).page ?? 1; // Default page to 1 if not provided
