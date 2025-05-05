@@ -1,1 +1,1 @@
-web: npm i && npm run build && node dist/main.js
+web: bun install && bun run build && bun run dist/main.js
